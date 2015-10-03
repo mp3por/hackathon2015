@@ -106,8 +106,8 @@ public class BallScript : MonoBehaviour {
 		returnToMenu ();
 	}
 
-	void returnToMenu () {
-		yield new WaitForSeconds (trasitionToMenuTime);
+	IEnumerator returnToMenu () {
+		yield return new WaitForSeconds (trasitionToMenuTime);
 		Application.LoadLevel (1);
 	} 
 }
