@@ -13,7 +13,7 @@ public class BallScript : MonoBehaviour {
 	private PlayerTwoScript p2s;
 	private PlayerOneScript p1s;
 
-	public int trasitionToMenuTime;
+	public int trasitionToMenuTime = 10;
 
 	private Rigidbody2D rb;
 	public int nextPiece;
@@ -106,8 +106,8 @@ public class BallScript : MonoBehaviour {
 		returnToMenu ();
 	}
 
-	IEnumerator returnToMenu () {
-		yield return new WaitForSeconds (trasitionToMenuTime);
+	void returnToMenu () {
+		yield new WaitForSeconds (trasitionToMenuTime);
 		Application.LoadLevel (1);
 	} 
 }
