@@ -36,8 +36,7 @@ public class BallScript : MonoBehaviour {
 		p2t.text = "" + p2s.score;
 	}
 
-
-
+	
 	void Start () {
 		lastPlayer = null;
 		rb = GetComponent<Rigidbody2D> ();
@@ -67,21 +66,23 @@ public class BallScript : MonoBehaviour {
 			p1s.score = p1s.score + 3;
 			p2t.text =  p2s.score.ToString();
 			p1t.text = p1s.score.ToString();
-			rb.velocity = new Vector2(0f,0f);
-			transform.position = new Vector2(0f,0f);
 			FindObjectOfType<SpawnerOne>().spawnNext(collision.contacts[0].point, piecesOne[nextPiece]);
 			shufflePiece();
-			Start ();
+			if (GameObject.FindGameObjectsWithTag("ball").Length < 2) {
+				Instantiate(gameObject, new Vector3(0, 0, 0), transform.rotation);
+			}
+			Destroy(gameObject);
 		} else if (collision.gameObject.CompareTag ("tetrisTriggerOne")) {
 			p1s.score = p1s.score - 2;
 			p2s.score = p2s.score + 3;
 			p2t.text = p2s.score.ToString();
 			p1t.text = p1s.score.ToString();
-			rb.velocity = new Vector2(0f,0f);
-			transform.position = new Vector2(0f,0f);
 			FindObjectOfType<SpawnerTwo>().spawnNext(collision.contacts[0].point, piecesTwo[nextPiece]);
 			shufflePiece();
-			Start ();
+			if (GameObject.FindGameObjectsWithTag("ball").Length < 2) {
+				Instantiate(gameObject, new Vector3(0, 0, 0), transform.rotation);
+			}
+			Destroy(gameObject);
 		}
 	}
 
