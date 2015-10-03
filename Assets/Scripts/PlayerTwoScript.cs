@@ -3,6 +3,8 @@ using System.Collections;
 
 public class PlayerTwoScript : MonoBehaviour {
 	public float speed;
+
+	public int score = 0;
 	
 	private Rigidbody2D rb;
 	

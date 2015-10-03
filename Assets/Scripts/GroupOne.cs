@@ -9,7 +9,6 @@ public class GroupOne : MonoBehaviour {
 	void Start() {
 		// Default position not valid? Then it's game over
 		if (!isValidGridPos()) {
-			Debug.Log("GAME OVER");
 			Destroy(gameObject);
 		}
 	}

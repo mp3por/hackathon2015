@@ -87,8 +87,7 @@ public class GroupTwo : MonoBehaviour {
 	bool isValidGridPos() {        
 		foreach (Transform child in transform) {
 			Vector2 v = GridTwo.roundVec2(child.position);
-			Debug.Log (v);
-			          			
+
 			// Not inside Border?
 			if (!GridTwo.insideBorder(v))
 				return false;
