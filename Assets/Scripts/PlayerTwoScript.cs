@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerTwoScript : MonoBehaviour {
 	public float speed;
-
+	public Boundary boundary;
 	public int score = 0;
 	
 	private Rigidbody2D rb;
@@ -16,19 +16,25 @@ public class PlayerTwoScript : MonoBehaviour {
 		score += amount;
 	}
 	
-	void Update () {
-		float direction = 0.0f;
-		if (Input.GetKey (KeyCode.UpArrow)) {
-			direction += 1;
-		}
-		if (Input.GetKey (KeyCode.DownArrow)) {
-			direction -= 1;
-		}
-		if (direction != 0) {
-			rb.position += new Vector2 (0.0f, speed * direction * Time.deltaTime);
-		} else {
-			rb.velocity = new Vector2(0f,0f);
-		}
-		rb.rotation = 0f;
+	private void move (float amount)
+	{
+		Vector2 movement = new Vector2 (0.0f, amount);
+		GetComponent<Rigidbody2D> ().velocity = movement * speed;
+		
+		GetComponent<Rigidbody2D> ().position = new Vector2 (
+			transform.position.x,
+			Mathf.Clamp (GetComponent<Rigidbody2D> ().position.y, boundary.yMin, boundary.yMax) 
+			);
 	}
+	
+	void FixedUpdate ()
+	{
+		if (Input.GetKey (KeyCode.UpArrow)) {
+			move (1);
+		} else if (Input.GetKey (KeyCode.DownArrow)) {
+			move (-1);
+		}
+	}
+
+
 }
