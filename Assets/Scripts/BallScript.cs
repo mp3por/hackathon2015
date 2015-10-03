@@ -13,6 +13,8 @@ public class BallScript : MonoBehaviour {
 	private PlayerTwoScript p2s;
 	private PlayerOneScript p1s;
 
+	public int trasitionToMenuTime;
+
 	private Rigidbody2D rb;
 	public int nextPiece;
 	private GameObject nextPieceObj;
@@ -98,5 +100,11 @@ public class BallScript : MonoBehaviour {
 		} else {
 			winT.text = "Player Left Wins";
 		}
+		returnToMenu ();
 	}
+
+	IEnumerator returnToMenu () {
+		yield return new WaitForSeconds (trasitionToMenuTime);
+		Application.LoadLevel (1);
+	} 
 }
