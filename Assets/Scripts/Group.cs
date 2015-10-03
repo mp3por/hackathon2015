@@ -15,50 +15,50 @@ public class Group : MonoBehaviour {
 	}
 	
 	void Update() {
-		// Move Left
-		if (Input.GetKeyDown(KeyCode.DownArrow)) {
-			// Modify position
-			transform.position += new Vector3(0, -step, 0);
-			
-			// See if valid
-			if (isValidGridPos())
-				// It's valid. Update grid.
-				updateGrid();
-			else
-				// It's not valid. revert.
-				transform.position += new Vector3(0, step, 0);
-		}
+//		// Move Left
+//		if (Input.GetKeyDown(KeyCode.DownArrow)) {
+//			// Modify position
+//			transform.position += new Vector3(0, -step, 0);
+//			
+//			// See if valid
+//			if (isValidGridPos())
+//				// It's valid. Update grid.
+//				updateGrid();
+//			else
+//				// It's not valid. revert.
+//				transform.position += new Vector3(0, step, 0);
+//		}
 		
-		// Move Right
-		else if (Input.GetKeyDown(KeyCode.UpArrow)) {
-			// Modify position
-			transform.position += new Vector3(0, step, 0);
-			
-			// See if valid
-			if (isValidGridPos())
-				// It's valid. Update grid.
-				updateGrid();
-			else
-				// It's not valid. revert.
-				transform.position += new Vector3(0, -step, 0);
-		}
+//		// Move Right
+//		else if (Input.GetKeyDown(KeyCode.UpArrow)) {
+//			// Modify position
+//			transform.position += new Vector3(0, step, 0);
+//			
+//			// See if valid
+//			if (isValidGridPos())
+//				// It's valid. Update grid.
+//				updateGrid();
+//			else
+//				// It's not valid. revert.
+//				transform.position += new Vector3(0, -step, 0);
+//		}
 		
-		// Rotate
-		else if (Input.GetKeyDown(KeyCode.RightArrow)) {
-			transform.Rotate(0, 0, -90);
-			
-			// See if valid
-			if (isValidGridPos())
-				// It's valid. Update grid.
-				updateGrid();
-			else
-				// It's not valid. revert.
-				transform.Rotate(0, 0, 90);
-		}
+//		// Rotate
+//		else if (Input.GetKeyDown(KeyCode.RightArrow)) {
+//			transform.Rotate(0, 0, -90);
+//			
+//			// See if valid
+//			if (isValidGridPos())
+//				// It's valid. Update grid.
+//				updateGrid();
+//			else
+//				// It's not valid. revert.
+//				transform.Rotate(0, 0, 90);
+//		}
 		
 		// Move Downwards and Fall
-		else if (Input.GetKeyDown(KeyCode.LeftArrow) ||
-		         Time.time - lastFall >= 1) {
+//		else if (Input.GetKeyDown(KeyCode.LeftArrow) ||
+		if(Time.time - lastFall >= 0.5) {
 			// Modify position
 			transform.position += new Vector3(-step, 0, 0);
 			
@@ -74,7 +74,7 @@ public class Group : MonoBehaviour {
 				Grid.deleteFullRows();
 				
 				// Spawn next Group
-				FindObjectOfType<Spawner>().spawnNext();
+//				FindObjectOfType<Spawner>().spawnNext();
 				
 				// Disable script
 				enabled = false;

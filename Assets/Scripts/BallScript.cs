@@ -6,7 +6,11 @@ public class BallScript : MonoBehaviour {
 
 	void Start () {
 		rb = GetComponent<Rigidbody2D> ();
-		rb.AddForce(new Vector2 (Random.Range (.3f, .4f), Random.Range (.01f, .05f)));
+		Vector2 initialForce = new Vector2 (Random.Range (.3f, .4f), Random.Range (.01f, .05f));
+		if (Random.Range (0, 100) < 50) {
+			initialForce.x *= -1;
+		}
+		rb.AddForce(initialForce);
 	}
 
 	void Update () {
@@ -19,7 +23,8 @@ public class BallScript : MonoBehaviour {
 		} else if (collision.gameObject.CompareTag ("tetrisTrigger")) {
 			rb.velocity = new Vector2(0f,0f);
 			transform.position = new Vector2(0f,0f);
-			Start();
+			FindObjectOfType<Spawner>().spawnNext(collision.contacts[0].point);
+			Start ();
 		}
 	}
 }
