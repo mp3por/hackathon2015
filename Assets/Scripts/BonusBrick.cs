@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PowerBall : MonoBehaviour {
+public class BonusBrick : MonoBehaviour {
 	private Rigidbody2D rb;
 
 	void Start () {
@@ -16,7 +16,7 @@ public class PowerBall : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D collision)
 	{
-		if (collision.collider.name == "tetrisTile") {
+		if (collision.collider.name == "TetrisTile") {
 			Destroy (collision.collider.gameObject);
 		} 
 		else if (collision.collider.CompareTag ("tetrisTriggerOne") || collision.collider.CompareTag ("tetrisTriggerTwo")) {

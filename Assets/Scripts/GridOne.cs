@@ -6,7 +6,7 @@ public class GridOne : MonoBehaviour {
 	public static int w = 19;
 	public static int h = 19;
 	public static float cellSize = 5;
-	private static Vector2 displacement = new Vector2(0,-60);
+	private static Vector2 displacement = new Vector2(0,-75);
 	public static Transform[,] grid = new Transform[w, h];
 
 	public static Vector2 roundVec2(Vector2 v) {

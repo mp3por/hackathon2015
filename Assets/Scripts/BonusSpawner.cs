@@ -7,8 +7,8 @@ public class BonusSpawner : MonoBehaviour
 	public GameObject playerTwo;
 	public GameObject bonusPoints;
 	public GameObject bonusBalls;
-//	public GameObject bonusBrick;
-	public GameObject bonusBomb;
+	public GameObject bonusBrick;
+//	public GameObject bonusBomb;
 	public GameObject bonusMushroom;
 	public GameObject ball;
 
@@ -21,7 +21,7 @@ public class BonusSpawner : MonoBehaviour
 	
 	void Start ()
 	{
-		objects = new GameObject[]{bonusPoints,bonusBalls,bonusBomb,bonusMushroom};
+		objects = new GameObject[]{bonusPoints,bonusBalls,bonusBrick,bonusMushroom};
 		StartCoroutine (SpawnBonuses ());
 	}
 
