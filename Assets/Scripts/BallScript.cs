@@ -28,17 +28,18 @@ public class BallScript : MonoBehaviour {
 
 	public void incrementPlayerOneScore (int amount){
 		p1s.score = p1s.score + amount;
-		p2t.text = "" + p1s.score;
+		p1t.text = "" + p1s.score;
 	}
 
 	public void incrementPlayerTwoScore (int amount){
 		p2s.score = p2s.score + amount;
-		p1t.text = "" + p2s.score;
+		p2t.text = "" + p2s.score;
 	}
 
 
 
 	void Start () {
+		lastPlayer = null;
 		rb = GetComponent<Rigidbody2D> ();
 		Vector2 initialForce = new Vector2 (Random.Range (.3f, .4f), Random.Range (.01f, .05f));
 		if (Random.Range (0, 100) < 50) {
@@ -53,29 +54,29 @@ public class BallScript : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D collision) {
-		if (collision.gameObject.CompareTag ("paddle1")) {
+		if (collision.gameObject.CompareTag ("paddle2")) {
 			lastPlayer = collision.gameObject;
 			rb.AddForce (new Vector2 (.0f, Random.Range (-.1f, .1f)));
 			incrementPlayerOneScore  (1);
-		} else if (collision.gameObject.CompareTag ("paddle2")) {
+		} else if (collision.gameObject.CompareTag ("paddle1")) {
 			lastPlayer = collision.gameObject;
 			rb.AddForce (new Vector2 (.0f, Random.Range (-.1f, .1f)));
 			incrementPlayerTwoScore  (1);
-		} else if (collision.gameObject.CompareTag ("tetrisTriggerOne")) {
+		} else if (collision.gameObject.CompareTag ("tetrisTriggerTwo")) {
 			p2s.score = p2s.score - 2;
 			p1s.score = p1s.score + 3;
-			p1t.text =  p2s.score.ToString();
-			p2t.text = p1s.score.ToString();
+			p2t.text =  p2s.score.ToString();
+			p1t.text = p1s.score.ToString();
 			rb.velocity = new Vector2(0f,0f);
 			transform.position = new Vector2(0f,0f);
 			FindObjectOfType<SpawnerOne>().spawnNext(collision.contacts[0].point, piecesOne[nextPiece]);
 			shufflePiece();
 			Start ();
-		} else if (collision.gameObject.CompareTag ("tetrisTriggerTwo")) {
+		} else if (collision.gameObject.CompareTag ("tetrisTriggerOne")) {
 			p1s.score = p1s.score - 2;
 			p2s.score = p2s.score + 3;
-			p1t.text = p2s.score.ToString();
-			p2t.text = p1s.score.ToString();
+			p2t.text = p2s.score.ToString();
+			p1t.text = p1s.score.ToString();
 			rb.velocity = new Vector2(0f,0f);
 			transform.position = new Vector2(0f,0f);
 			FindObjectOfType<SpawnerTwo>().spawnNext(collision.contacts[0].point, piecesTwo[nextPiece]);
@@ -91,7 +92,7 @@ public class BallScript : MonoBehaviour {
 	}
 
 	public void PlayerWin(int p) {
-		if (p == 1) {
+		if (p == 2) {
 			winT.text = "Player Right Wins";
 		} else {
 			winT.text = "Player Left Wins";
