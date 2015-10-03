@@ -66,7 +66,7 @@ public class BallScript : MonoBehaviour {
 			p1s.score = p1s.score + 3;
 			p2t.text =  p2s.score.ToString();
 			p1t.text = p1s.score.ToString();
-			FindObjectOfType<SpawnerOne>().spawnNext(collision.contacts[0].point, piecesOne[nextPiece]);
+			FindObjectOfType<SpawnerTwo>().spawnNext(collision.contacts[0].point, piecesTwo[nextPiece]);
 			shufflePiece();
 			if (GameObject.FindGameObjectsWithTag("ball").Length < 2) {
 				Instantiate(gameObject, new Vector3(0, 0, 0), transform.rotation);
@@ -77,7 +77,7 @@ public class BallScript : MonoBehaviour {
 			p2s.score = p2s.score + 3;
 			p2t.text = p2s.score.ToString();
 			p1t.text = p1s.score.ToString();
-			FindObjectOfType<SpawnerTwo>().spawnNext(collision.contacts[0].point, piecesTwo[nextPiece]);
+			FindObjectOfType<SpawnerOne>().spawnNext(collision.contacts[0].point, piecesOne[nextPiece]);
 			shufflePiece();
 			if (GameObject.FindGameObjectsWithTag("ball").Length < 2) {
 				Instantiate(gameObject, new Vector3(0, 0, 0), transform.rotation);
