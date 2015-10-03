@@ -4,12 +4,18 @@ using System.Collections;
 public class GroupTwo : MonoBehaviour {
 	// Time since last gravity tick
 	float lastFall = 0;
-	public float step ;
+	public float step;
 
 	void Start() {
 		// Default position not valid? Then it's game over
 		if (!isValidGridPos()) {
-			Destroy(GameObject.Find("Ball"));
+			GameObject ball = GameObject.Find("Ball");
+
+			BallScript bs = ball.GetComponent<BallScript>();
+
+			bs.PlayerWin(2);
+			
+			Destroy(ball);
 			Destroy(gameObject);
 		}
 	}
