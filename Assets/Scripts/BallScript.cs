@@ -3,6 +3,11 @@ using System.Collections;
 
 public class BallScript : MonoBehaviour {
 	private Rigidbody2D rb;
+	public int nextPiece;
+	private GameObject nextPieceObj;
+	public GameObject[] piecesOne;
+	public GameObject[] piecesTwo;
+	public GameObject[] pieces;
 
 	void Start () {
 		rb = GetComponent<Rigidbody2D> ();
@@ -11,10 +16,7 @@ public class BallScript : MonoBehaviour {
 			initialForce.x *= -1;
 		}
 		rb.AddForce(initialForce);
-	}
-
-	void Update () {
-
+		shufflePiece ();
 	}
 	
 	void OnCollisionEnter2D(Collision2D collision) {
@@ -23,13 +25,21 @@ public class BallScript : MonoBehaviour {
 		} else if (collision.gameObject.CompareTag ("tetrisTriggerOne")) {
 			rb.velocity = new Vector2(0f,0f);
 			transform.position = new Vector2(0f,0f);
-			FindObjectOfType<SpawnerOne>().spawnNext(collision.contacts[0].point);
+			FindObjectOfType<SpawnerOne>().spawnNext(collision.contacts[0].point, piecesOne[nextPiece]);
+			shufflePiece();
 			Start ();
 		} else if (collision.gameObject.CompareTag ("tetrisTriggerTwo")) {
 			rb.velocity = new Vector2(0f,0f);
 			transform.position = new Vector2(0f,0f);
-			FindObjectOfType<SpawnerTwo>().spawnNext(collision.contacts[0].point);
+			FindObjectOfType<SpawnerTwo>().spawnNext(collision.contacts[0].point, piecesTwo[nextPiece]);
+			shufflePiece();
 			Start ();
 		}
+	}
+
+	void shufflePiece() {
+		nextPiece = Random.Range (0, pieces.GetLength (0));
+		Destroy (nextPieceObj);
+		nextPieceObj = Instantiate (pieces[nextPiece], new Vector3 (0, 75, 0), Quaternion.identity) as GameObject;
 	}
 }

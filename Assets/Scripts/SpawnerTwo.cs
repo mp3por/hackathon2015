@@ -2,18 +2,14 @@
 using System.Collections;
 
 public class SpawnerTwo : MonoBehaviour {
-	
-	// Groups
-	public GameObject[] groups;
 
-	public void spawnNext(Vector3 position) {
-		// Random Index
-		int i = Random.Range(0, groups.Length);
+	public void spawnNext(Vector3 position, GameObject piece) {
 		position.y = (int)(position.y / 5) * 5;
 		position.x = 75;
+
+		piece.AddComponent<GroupTwo>();
 		
-		// Spawn Group at current Position
-		GameObject go = (GameObject)Instantiate(groups[i],
+		Instantiate(piece,
 		            position,
 		            Quaternion.identity);
 	}

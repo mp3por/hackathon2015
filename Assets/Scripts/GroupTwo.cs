@@ -43,18 +43,18 @@ public class GroupTwo : MonoBehaviour {
 //				transform.position += new Vector3(0, -step, 0);
 //		}
 		
-//		// Rotate
-//		else if (Input.GetKeyDown(KeyCode.RightArrow)) {
-//			transform.Rotate(0, 0, -90);
-//			
-//			// See if valid
-//			if (isValidGridPos())
-//				// It's valid. Update grid.
-//				updateGrid();
-//			else
-//				// It's not valid. revert.
-//				transform.Rotate(0, 0, 90);
-//		}
+		// Rotate
+		if (Input.GetKeyDown(KeyCode.Slash)) {
+			transform.Rotate(0, 0, -90);
+			
+			// See if valid
+			if (isValidGridPos())
+				// It's valid. Update grid.
+				updateGrid();
+			else
+				// It's not valid. revert.
+				transform.Rotate(0, 0, 90);
+		}
 		
 		// Move Downwards and Fall
 //		else if (Input.GetKeyDown(KeyCode.LeftArrow) ||
