@@ -68,29 +68,32 @@ public class BallScript : MonoBehaviour {
 			p1s.score = p1s.score + 3;
 			p2t.text =  p2s.score.ToString();
 			p1t.text = p1s.score.ToString();
-			FindObjectOfType<SpawnerOne>().spawnNext(collision.contacts[0].point, piecesOne[nextPiece]);
-			shufflePiece();
+			FindObjectOfType<SpawnerTwo>().spawnNext(collision.contacts[0].point, piecesTwo[nextPiece]);
 			if (GameObject.FindGameObjectsWithTag("ball").Length < 2) {
 				Instantiate(gameObject, new Vector3(0, 0, 0), transform.rotation);
 			}
 			Destroy(gameObject);
+			shufflePiece();
 		} else if (collision.gameObject.CompareTag ("tetrisTriggerOne")) {
 			p1s.score = p1s.score - 2;
 			p2s.score = p2s.score + 3;
 			p2t.text = p2s.score.ToString();
 			p1t.text = p1s.score.ToString();
-			FindObjectOfType<SpawnerTwo>().spawnNext(collision.contacts[0].point, piecesTwo[nextPiece]);
-			shufflePiece();
+			FindObjectOfType<SpawnerOne>().spawnNext(collision.contacts[0].point, piecesOne[nextPiece]);
 			if (GameObject.FindGameObjectsWithTag("ball").Length < 2) {
 				Instantiate(gameObject, new Vector3(0, 0, 0), transform.rotation);
 			}
 			Destroy(gameObject);
+			shufflePiece();
 		}
 	}
 
 	void shufflePiece() {
+		GameObject[] objs = GameObject.FindGameObjectsWithTag ("nextPiece");
+		foreach (GameObject obj in objs) {
+			Destroy(obj);
+		}
 		nextPiece = Random.Range (0, pieces.GetLength (0));
-		Destroy (nextPieceObj);
 		nextPieceObj = Instantiate (pieces[nextPiece], new Vector3 (0, 75, 0), Quaternion.identity) as GameObject;
 	}
 

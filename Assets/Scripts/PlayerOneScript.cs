@@ -16,8 +16,19 @@ public class PlayerOneScript : MonoBehaviour
 
 	public void incrementScore (int amount)
 	{
-		Debug.Log ("increment");
 		score += amount;
+	}
+
+	public void increaseSize() {
+		if (transform.localScale.y + 0.3 <= 1.3) {
+			transform.localScale += new Vector3 (0, 0.3F, 0);
+			StartCoroutine (decreaseSize ());
+		}
+	}
+
+	IEnumerator decreaseSize () {
+		yield return new WaitForSeconds (15);
+		transform.localScale -= new Vector3(0, 0.3F, 0);
 	}
 
 	private void move (float amount)

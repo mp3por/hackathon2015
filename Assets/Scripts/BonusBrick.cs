@@ -4,7 +4,6 @@ using System.Collections;
 public class PowerBall : MonoBehaviour {
 	private Rigidbody2D rb;
 
-	// Use this for initialization
 	void Start () {
 		transform.position = new Vector3 (-100, 0, 0);
 		rb = GetComponent<Rigidbody2D> ();
@@ -14,17 +13,14 @@ public class PowerBall : MonoBehaviour {
 		}
 		rb.AddForce(initialForce);
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
-	void OnTriggerEnter2D(Collider2D collision)
+	void OnCollisionEnter2D(Collision2D collision)
 	{
-		if(collision.gameObject.name == "tetrisTile")
-		{
-			Debug.Log ("HASDHAUISBFASJNCLFMA> <DCS?");		
+		if (collision.collider.name == "tetrisTile") {
+			Destroy (collision.collider.gameObject);
+		} 
+		else if (collision.collider.CompareTag ("tetrisTriggerOne") || collision.collider.CompareTag ("tetrisTriggerTwo")) {
+			Destroy (gameObject);
 		}
 	}
 }
