@@ -11,6 +11,10 @@ public class PlayerTwoScript : MonoBehaviour {
 	void Start () {
 		rb = GetComponent<Rigidbody2D> ();
 	}
+
+	public void incrementScore (int amount) {
+		score += amount;
+	}
 	
 	void Update () {
 		float direction = 0.0f;

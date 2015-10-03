@@ -19,6 +19,24 @@ public class BallScript : MonoBehaviour {
 	public GameObject[] piecesTwo;
 	public GameObject[] pieces;
 
+	private GameObject lastPlayer;
+
+	public GameObject getLastPlayer () {
+		return lastPlayer;
+	}
+
+	public void incrementPlayerOneScore (int amount){
+		p1s.score = p1s.score + amount;
+		p2t.text = "Score: " + p1s.score;
+	}
+
+	public void incrementPlayerTwoScore (int amount){
+		p2s.score = p2s.score + amount;
+		p1t.text = "Score: " + p2s.score;
+	}
+
+
+
 	void Start () {
 		rb = GetComponent<Rigidbody2D> ();
 		Vector2 initialForce = new Vector2 (Random.Range (.3f, .4f), Random.Range (.01f, .05f));
@@ -35,13 +53,13 @@ public class BallScript : MonoBehaviour {
 	
 	void OnCollisionEnter2D(Collision2D collision) {
 		if (collision.gameObject.CompareTag ("paddle1")) {
+			lastPlayer = collision.gameObject;
 			rb.AddForce (new Vector2 (.0f, Random.Range (-.1f, .1f)));
-			p1s.score = p1s.score + 1;
-			p2t.text = "Score: " + p1s.score;
+			incrementPlayerOneScore  (1);
 		} else if (collision.gameObject.CompareTag ("paddle2")) {
+			lastPlayer = collision.gameObject;
 			rb.AddForce (new Vector2 (.0f, Random.Range (-.1f, .1f)));
-			p2s.score = p2s.score + 1;
-			p1t.text = "Score: " + p2s.score;
+			incrementPlayerTwoScore  (1);
 		} else if (collision.gameObject.CompareTag ("tetrisTriggerOne")) {
 			rb.velocity = new Vector2(0f,0f);
 			transform.position = new Vector2(0f,0f);

@@ -11,7 +11,12 @@ public class PlayerOneScript : MonoBehaviour {
 	void Start () {
 		rb = GetComponent<Rigidbody2D> ();
 	}
-	
+
+	public void incrementScore (int amount) {
+		Debug.Log ("increment");
+		score += amount;
+	}
+
 	void Update () {
 		float direction = 0.0f;
 		if (Input.GetKey (KeyCode.W)) {
