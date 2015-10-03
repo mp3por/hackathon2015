@@ -18,6 +18,11 @@ public class PlayerTwoScript : MonoBehaviour {
 		if (Input.GetKey (KeyCode.DownArrow)) {
 			direction -= 1;
 		}
-		rb.AddForce(new Vector3(0.0f,speed*direction*Time.deltaTime,0.0f));
+		if (direction != 0) {
+			rb.position += new Vector2 (0.0f, speed * direction * Time.deltaTime);
+		} else {
+			rb.velocity = new Vector2(0f,0f);
+		}
+		rb.rotation = 0f;
 	}
 }
