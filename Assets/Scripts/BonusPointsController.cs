@@ -2,11 +2,6 @@
 using System.Collections;
 
 public class BonusPointsController : MonoBehaviour {
-	private GameObject ball;
-
-	void SetBall (GameObject ball){
-		this.ball = ball;
-	}
 
 	void OnTriggerEnter2D (Collider2D other) {
 		BallScript ballScript = other.GetComponent<BallScript> ();
