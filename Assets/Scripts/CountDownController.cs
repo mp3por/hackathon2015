@@ -4,18 +4,24 @@ using UnityEngine.UI;
 
 public class CountDownController : MonoBehaviour
 {
+
 	public Text countDownText;
 	public GameObject ball;
 
 	private int privateCountDownTime = 4;
 	
-	void Start ()
-	{
-		startCountDown ();
+//	void Start ()
+//	{
+//		StartCountDown ();
+//	}
+
+	public void SetBall (GameObject ball){
+		this.ball = ball;
 	}
 
-	public void startCountDown (){
-		privateCountDownTime = 4;
+	public void StartCountDown (){
+		Debug.Log ("Start Count Down");
+		this.privateCountDownTime = 4;
 		StartCoroutine (SpawnBall ());
 	}
 
@@ -27,10 +33,8 @@ public class CountDownController : MonoBehaviour
 			yield return new WaitForSeconds (1);
 		} while (privateCountDownTime > 0);
 
-		Vector3 spawnPosition = new Vector2 (0, 0);
-		Quaternion spawnRotation = Quaternion.identity;
-		Instantiate (ball, spawnPosition, spawnRotation);
-
 		countDownText.text = "";
+		ball.BroadcastMessage ("PushBall");
+		Debug.Log ("countdown end");
 	}
 }

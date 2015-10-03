@@ -10,8 +10,12 @@ public class BallScript : MonoBehaviour {
 	public Text p2t;
 	public Text winT;
 
+	private int countDownTime = 3;
+
 	private PlayerTwoScript p2s;
 	private PlayerOneScript p1s;
+
+	public GameObject countDown;
 
 	public int trasitionToMenuTime = 10;
 
@@ -38,20 +42,30 @@ public class BallScript : MonoBehaviour {
 		p2t.text = "" + p2s.score;
 	}
 
+//	public void setCountDownText (){
+//		countDownText.text = "" + countDownTime;
+//		countDownTime -= 1;
+//	}
 	
 	void Start () {
+		countDownTime = 3;
 		lastPlayer = null;
+		
+		p2s = player2.GetComponent<PlayerTwoScript> ();
+		p1s = player1.GetComponent<PlayerOneScript> ();
+
+		countDown.BroadcastMessage ("SetBall", gameObject);
+		countDown.BroadcastMessage ("StartCountDown");
+	}
+
+	void PushBall (){
 		rb = GetComponent<Rigidbody2D> ();
 		Vector2 initialForce = new Vector2 (Random.Range (.3f, .4f), Random.Range (.01f, .05f));
 		if (Random.Range (0, 100) < 50) {
 			initialForce.x *= -1;
 		}
 		rb.AddForce(initialForce);
-
 		shufflePiece ();
-
-		p2s = player2.GetComponent<PlayerTwoScript> ();
-		p1s = player1.GetComponent<PlayerOneScript> ();
 	}
 
 	void OnCollisionEnter2D(Collision2D collision) {
