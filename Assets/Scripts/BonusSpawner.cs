@@ -36,7 +36,6 @@ public class BonusSpawner : MonoBehaviour
 			Vector3 spawnPosition = new Vector2 (spawnValues.x, Random.Range (-spawnValues.y, spawnValues.y));
 			Quaternion spawnRotation = Quaternion.identity;
 			GameObject bonus = Instantiate (objects[getRandomIndex(0,objects.Length)], spawnPosition, spawnRotation) as GameObject;
-			bonus.SendMessage("SetBall", ball);
 			yield return new WaitForSeconds (bonusSpawnWaitTime);
 		}
 	}
