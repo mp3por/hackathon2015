@@ -10,7 +10,7 @@ public class SpawnerTwo : MonoBehaviour {
 		// Random Index
 		int i = Random.Range(0, groups.Length);
 		position.y = (int)(position.y / 5) * 5;
-		position.x = 65;
+		position.x = 75;
 		
 		// Spawn Group at current Position
 		GameObject go = (GameObject)Instantiate(groups[i],
