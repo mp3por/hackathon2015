@@ -28,12 +28,12 @@ public class BallScript : MonoBehaviour {
 
 	public void incrementPlayerOneScore (int amount){
 		p1s.score = p1s.score + amount;
-		p2t.text = "Score: " + p1s.score;
+		p2t.text = "" + p1s.score;
 	}
 
 	public void incrementPlayerTwoScore (int amount){
 		p2s.score = p2s.score + amount;
-		p1t.text = "Score: " + p2s.score;
+		p1t.text = "" + p2s.score;
 	}
 
 
