@@ -4,18 +4,20 @@ using System.Collections;
 public class PlayerTwoScript : MonoBehaviour {
 	public float speed;
 	
+	private Rigidbody2D rb;
+	
 	void Start () {
-		
+		rb = GetComponent<Rigidbody2D> ();
 	}
 	
 	void Update () {
-		Vector3 new_speed = new Vector3 (0, 0, 0);
+		float direction = 0.0f;
 		if (Input.GetKey (KeyCode.UpArrow)) {
-			new_speed.y += speed * Time.deltaTime;
+			direction += 1;
 		}
 		if (Input.GetKey (KeyCode.DownArrow)) {
-			new_speed.y -= speed * Time.deltaTime;
+			direction -= 1;
 		}
-		transform.Translate (new_speed);
+		rb.AddForce(new Vector3(0.0f,speed*direction*Time.deltaTime,0.0f));
 	}
 }

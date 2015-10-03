@@ -4,18 +4,20 @@ using System.Collections;
 public class PlayerOneScript : MonoBehaviour {
 	public float speed;
 
+	private Rigidbody2D rb;
+
 	void Start () {
-	
+		rb = GetComponent<Rigidbody2D> ();
 	}
 	
 	void Update () {
-		Vector3 new_speed = new Vector3 (0, 0, 0);
-		if (Input.GetKey ("w")) {
-			new_speed.y += speed * Time.deltaTime;
+		float direction = 0.0f;
+		if (Input.GetKey (KeyCode.W)) {
+			direction += 1;
 		}
-		if (Input.GetKey ("s")) {
-			new_speed.y -= speed * Time.deltaTime;
+		if (Input.GetKey (KeyCode.S)) {
+			direction -= 1;
 		}
-		transform.Translate (new_speed);
+		rb.AddForce(new Vector3(0.0f,speed*direction*Time.deltaTime,0.0f));
 	}
 }
