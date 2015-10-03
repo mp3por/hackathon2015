@@ -51,7 +51,7 @@ public class BallScript : MonoBehaviour {
 		p1s = player1.GetComponent<PlayerTwoScript> ();
 		p2s = player2.GetComponent<PlayerOneScript> ();
 	}
-	
+
 	void OnCollisionEnter2D(Collision2D collision) {
 		if (collision.gameObject.CompareTag ("paddle1")) {
 			lastPlayer = collision.gameObject;
@@ -62,12 +62,20 @@ public class BallScript : MonoBehaviour {
 			rb.AddForce (new Vector2 (.0f, Random.Range (-.1f, .1f)));
 			incrementPlayerTwoScore  (1);
 		} else if (collision.gameObject.CompareTag ("tetrisTriggerOne")) {
+			p2s.score = p2s.score - 2;
+			p1s.score = p1s.score + 3;
+			p1t.text =  p2s.score.ToString();
+			p2t.text = p1s.score.ToString();
 			rb.velocity = new Vector2(0f,0f);
 			transform.position = new Vector2(0f,0f);
 			FindObjectOfType<SpawnerOne>().spawnNext(collision.contacts[0].point, piecesOne[nextPiece]);
 			shufflePiece();
 			Start ();
 		} else if (collision.gameObject.CompareTag ("tetrisTriggerTwo")) {
+			p1s.score = p1s.score - 2;
+			p2s.score = p2s.score + 3;
+			p1t.text = p2s.score.ToString();
+			p2t.text = p1s.score.ToString();
 			rb.velocity = new Vector2(0f,0f);
 			transform.position = new Vector2(0f,0f);
 			FindObjectOfType<SpawnerTwo>().spawnNext(collision.contacts[0].point, piecesTwo[nextPiece]);

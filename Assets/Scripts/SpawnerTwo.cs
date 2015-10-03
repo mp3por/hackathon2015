@@ -7,8 +7,6 @@ public class SpawnerTwo : MonoBehaviour {
 		position.y = (int)(position.y / 5) * 5;
 		position.x = 75;
 
-		piece.AddComponent<GroupTwo>();
-		
 		Instantiate(piece,
 		            position,
 		            Quaternion.identity);
