@@ -19,6 +19,7 @@ public class BallScript : MonoBehaviour {
 		} else if (collision.gameObject.CompareTag ("tetrisTrigger")) {
 			rb.velocity = new Vector2(0f,0f);
 			transform.position = new Vector2(0f,0f);
+			Start();
 		}
 	}
 }
