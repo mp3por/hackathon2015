@@ -11,13 +11,8 @@ public class PlayerOneScript : MonoBehaviour
 {
 	public float speed;
 	public int score = 0;
-	private Rigidbody2D rb;
-	public Boundary boundary;
 
-	void Start ()
-	{
-		rb = GetComponent<Rigidbody2D> ();
-	}
+	public Boundary boundary;
 
 	public void incrementScore (int amount)
 	{

@@ -3,14 +3,9 @@ using System.Collections;
 
 public class PlayerTwoScript : MonoBehaviour {
 	public float speed;
-	public Boundary boundary;
 	public int score = 0;
-	
-	private Rigidbody2D rb;
-	
-	void Start () {
-		rb = GetComponent<Rigidbody2D> ();
-	}
+
+	public Boundary boundary;
 
 	public void incrementScore (int amount) {
 		score += amount;
