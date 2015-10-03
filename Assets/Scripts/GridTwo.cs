@@ -1,17 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Grid : MonoBehaviour {
+public class GridTwo : MonoBehaviour {
 	// The Grid itself
 	public static int w = 19;
 	public static int h = 19;
 	public static float cellSize = 5;
-	private static Vector2 displacement = new Vector2(0,-60);
+	private static Vector2 displacement = new Vector2(0,60);
 	public static Transform[,] grid = new Transform[w, h];
 
 	public static Vector2 roundVec2(Vector2 v) {
+
 		return new Vector2(Mathf.Round((v.y-displacement.x+w*cellSize/2)/cellSize),
-		                   Mathf.Round((-(displacement.y-v.x)+h*cellSize)/cellSize));
+		                   Mathf.Round((h*cellSize-(v.x-displacement.y))/cellSize));
 	}
 
 	public static bool insideBorder(Vector2 pos) {
@@ -36,7 +37,7 @@ public class Grid : MonoBehaviour {
 				grid[x, y] = null;
 				
 				// Update Block position
-				grid[x, y-1].position += new Vector3(-cellSize, 0, 0);
+				grid[x, y-1].position += new Vector3(cellSize, 0, 0);
 			}
 		}
 	}

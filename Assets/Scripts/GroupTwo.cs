@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Group : MonoBehaviour {
+public class GroupTwo : MonoBehaviour {
 	// Time since last gravity tick
 	float lastFall = 0;
 	public float step ;
@@ -60,7 +60,7 @@ public class Group : MonoBehaviour {
 //		else if (Input.GetKeyDown(KeyCode.LeftArrow) ||
 		if(Time.time - lastFall >= 0.5) {
 			// Modify position
-			transform.position += new Vector3(-step, 0, 0);
+			transform.position += new Vector3(step, 0, 0);
 			
 			// See if valid
 			if (isValidGridPos()) {
@@ -68,10 +68,10 @@ public class Group : MonoBehaviour {
 				updateGrid();
 			} else {
 				// It's not valid. revert.
-				transform.position += new Vector3(step, 0, 0);
+				transform.position += new Vector3(-step, 0, 0);
 				
 				// Clear filled horizontal lines
-				Grid.deleteFullRows();
+				GridTwo.deleteFullRows();
 				
 				// Spawn next Group
 //				FindObjectOfType<Spawner>().spawnNext();
@@ -86,15 +86,16 @@ public class Group : MonoBehaviour {
 
 	bool isValidGridPos() {        
 		foreach (Transform child in transform) {
-			Vector2 v = Grid.roundVec2(child.position);
+			Vector2 v = GridTwo.roundVec2(child.position);
+			Debug.Log (v);
 			          			
 			// Not inside Border?
-			if (!Grid.insideBorder(v))
+			if (!GridTwo.insideBorder(v))
 				return false;
 			
 			// Block in grid cell (and not part of same group)?
-			if (Grid.grid[(int)v.x, (int)v.y] != null &&
-			    Grid.grid[(int)v.x, (int)v.y].parent != transform)
+			if (GridTwo.grid[(int)v.x, (int)v.y] != null &&
+			    GridTwo.grid[(int)v.x, (int)v.y].parent != transform)
 				return false;
 		}
 		return true;
@@ -102,16 +103,16 @@ public class Group : MonoBehaviour {
 
 	void updateGrid() {
 		// Remove old children from grid
-		for (int y = 0; y < Grid.h; ++y)
-			for (int x = 0; x < Grid.w; ++x)
-				if (Grid.grid[x, y] != null)
-					if (Grid.grid[x, y].parent == transform)
-						Grid.grid[x, y] = null;
+		for (int y = 0; y < GridTwo.h; ++y)
+			for (int x = 0; x < GridTwo.w; ++x)
+				if (GridTwo.grid[x, y] != null)
+					if (GridTwo.grid[x, y].parent == transform)
+						GridTwo.grid[x, y] = null;
 		
 		// Add new children to grid
 		foreach (Transform child in transform) {
-			Vector2 v = Grid.roundVec2(child.position);
-			Grid.grid[(int)v.x, (int)v.y] = child;
+			Vector2 v = GridTwo.roundVec2(child.position);
+			GridTwo.grid[(int)v.x, (int)v.y] = child;
 		}        
 	}
 }

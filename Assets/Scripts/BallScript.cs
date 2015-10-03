@@ -20,10 +20,15 @@ public class BallScript : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D collision) {
 		if (collision.gameObject.CompareTag ("paddle")) {
 			rb.AddForce (new Vector2 (.0f, Random.Range (-.1f, .1f)));
-		} else if (collision.gameObject.CompareTag ("tetrisTrigger")) {
+		} else if (collision.gameObject.CompareTag ("tetrisTriggerOne")) {
 			rb.velocity = new Vector2(0f,0f);
 			transform.position = new Vector2(0f,0f);
-			FindObjectOfType<Spawner>().spawnNext(collision.contacts[0].point);
+			FindObjectOfType<SpawnerOne>().spawnNext(collision.contacts[0].point);
+			Start ();
+		} else if (collision.gameObject.CompareTag ("tetrisTriggerTwo")) {
+			rb.velocity = new Vector2(0f,0f);
+			transform.position = new Vector2(0f,0f);
+			FindObjectOfType<SpawnerTwo>().spawnNext(collision.contacts[0].point);
 			Start ();
 		}
 	}
