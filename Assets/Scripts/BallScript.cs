@@ -10,8 +10,8 @@ public class BallScript : MonoBehaviour {
 	public Text p2t;
 	public Text winT;
 
-	private PlayerTwoScript p1s;
-	private PlayerOneScript p2s;
+	private PlayerTwoScript p2s;
+	private PlayerOneScript p1s;
 
 	private Rigidbody2D rb;
 	public int nextPiece;
@@ -49,19 +49,19 @@ public class BallScript : MonoBehaviour {
 
 		shufflePiece ();
 
-		p1s = player1.GetComponent<PlayerTwoScript> ();
-		p2s = player2.GetComponent<PlayerOneScript> ();
+		p2s = player2.GetComponent<PlayerTwoScript> ();
+		p1s = player1.GetComponent<PlayerOneScript> ();
 	}
 
 	void OnCollisionEnter2D(Collision2D collision) {
 		if (collision.gameObject.CompareTag ("paddle2")) {
 			lastPlayer = collision.gameObject;
 			rb.AddForce (new Vector2 (.0f, Random.Range (-.1f, .1f)));
-			incrementPlayerOneScore  (1);
+			incrementPlayerTwoScore  (1);
 		} else if (collision.gameObject.CompareTag ("paddle1")) {
 			lastPlayer = collision.gameObject;
 			rb.AddForce (new Vector2 (.0f, Random.Range (-.1f, .1f)));
-			incrementPlayerTwoScore  (1);
+			incrementPlayerOneScore  (1);
 		} else if (collision.gameObject.CompareTag ("tetrisTriggerTwo")) {
 			p2s.score = p2s.score - 2;
 			p1s.score = p1s.score + 3;
