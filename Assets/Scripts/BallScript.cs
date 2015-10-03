@@ -8,6 +8,7 @@ public class BallScript : MonoBehaviour {
 
 	public Text p1t;
 	public Text p2t;
+	public Text winT;
 
 	private PlayerTwoScript p1s;
 	private PlayerOneScript p2s;
@@ -69,5 +70,13 @@ public class BallScript : MonoBehaviour {
 		nextPiece = Random.Range (0, pieces.GetLength (0));
 		Destroy (nextPieceObj);
 		nextPieceObj = Instantiate (pieces[nextPiece], new Vector3 (0, 75, 0), Quaternion.identity) as GameObject;
+	}
+
+	public void PlayerWin(int p) {
+		if (p == 1) {
+			winT.text = "Player Right Wins";
+		} else {
+			winT.text = "Player Left Wins";
+		}
 	}
 }
