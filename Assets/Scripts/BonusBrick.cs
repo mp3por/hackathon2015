@@ -5,12 +5,19 @@ public class BonusBrick : MonoBehaviour {
 	private Rigidbody2D rb;
 
 	void Start () {
+	}
+
+	public void PlayerTwo() {
+		transform.position = new Vector3 (100, 0, 0);
+		rb = GetComponent<Rigidbody2D> ();
+		Vector2 initialForce = new Vector2 (Random.Range (-.3f, -.4f), Random.Range (-.05f, .05f));
+		rb.AddForce(initialForce);
+	}
+
+	public void PlayerOne() {
 		transform.position = new Vector3 (-100, 0, 0);
 		rb = GetComponent<Rigidbody2D> ();
-		Vector2 initialForce = new Vector2 (Random.Range (.3f, .4f), Random.Range (.01f, .05f));
-		if (Random.Range (0, 100) < 50) {
-			initialForce.x *= -1;
-		}
+		Vector2 initialForce = new Vector2 (Random.Range (.3f, .4f), Random.Range (-.05f, .05f));
 		rb.AddForce(initialForce);
 	}
 
