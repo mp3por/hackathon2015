@@ -12,6 +12,8 @@ public class BallScript : MonoBehaviour {
 
 	public AudioSource source;
 
+	private GameObject secondBall;
+
 	public Text p1t;
 	public Text p2t;
 	public Text winT;
@@ -44,7 +46,13 @@ public class BallScript : MonoBehaviour {
 		p2s.score = p2s.score + amount;
 		p2t.text = "" + p2s.score;
 	}
-	
+
+	public static bool startCooldown = true;
+
+	public void setCooldown (bool a) {
+		startCooldown = a;
+	}
+
 	void Start () {
 		countDownTime = 3;
 		lastPlayer = null;
@@ -54,8 +62,13 @@ public class BallScript : MonoBehaviour {
 		p2s = player2.GetComponent<PlayerTwoScript> ();
 		p1s = player1.GetComponent<PlayerOneScript> ();
 
-		countDown.BroadcastMessage ("SetBall", gameObject);
-		countDown.BroadcastMessage ("StartCountDown");
+		if (startCooldown) {
+			countDown.BroadcastMessage ("SetBall", gameObject);
+			countDown.BroadcastMessage ("StartCountDown");
+		} else {
+			PushBall();
+			startCooldown = true;
+		}
 	}
 
 	void PushBall (){
@@ -111,18 +124,14 @@ public class BallScript : MonoBehaviour {
 		(Instantiate (pieces [nextPiece], new Vector3 (0, 75, 0), Quaternion.identity) as GameObject).transform.tag = "nextPiece";
 	}
 
-	public void PlayerWin(int p) {
+	public IEnumerator PlayerWin(int p) {
 		source.PlayOneShot(winSound);
 		if (p == 2) {
 			winT.text = "Player Right Wins";
 		} else {
 			winT.text = "Player Left Wins";
 		}
-		returnToMenu ();
-	}
-
-	IEnumerator returnToMenu () {
 		yield return new WaitForSeconds (trasitionToMenuTime);
 		Application.LoadLevel (1);
-	} 
+	}
 }
