@@ -8,16 +8,16 @@ public class BonusBrick : MonoBehaviour {
 	}
 
 	public void PlayerTwo() {
-		transform.position = new Vector3 (100, 0, 0);
+		transform.position = new Vector3 (80, 0, 0);
 		rb = GetComponent<Rigidbody2D> ();
-		Vector2 initialForce = new Vector2 (Random.Range (-.3f, -.4f), Random.Range (-.05f, .05f));
+		Vector2 initialForce = new Vector2 (Random.Range (.3f, .4f), Random.Range (-.05f, .05f));
 		rb.AddForce(initialForce);
 	}
 
 	public void PlayerOne() {
-		transform.position = new Vector3 (-100, 0, 0);
+		transform.position = new Vector3 (-80, 0, 0);
 		rb = GetComponent<Rigidbody2D> ();
-		Vector2 initialForce = new Vector2 (Random.Range (.3f, .4f), Random.Range (-.05f, .05f));
+		Vector2 initialForce = new Vector2 (Random.Range (-.3f, -.4f), Random.Range (-.05f, .05f));
 		rb.AddForce(initialForce);
 	}
 

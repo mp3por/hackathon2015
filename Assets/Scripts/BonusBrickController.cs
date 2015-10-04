@@ -12,7 +12,7 @@ public class BonusBrickController : MonoBehaviour {
 		if (player.CompareTag ("paddle1")) {
 			bonusBrick.GetComponent<BonusBrick> ().PlayerOne ();
 		} else {
-			bonusBrick.GetComponent<BonusBrick> ().PlayerOne ();
+			bonusBrick.GetComponent<BonusBrick> ().PlayerTwo ();
 		}
 	}
 }
