@@ -10,8 +10,7 @@ public class DeleteByContact : MonoBehaviour {
 	private AudioSource source;
 
 	void Start () {
-		source = GameObject.FindObjectOfType<AudioSource> ();
-		Debug.Log (source.mute);
+		source = GameObject.FindGameObjectWithTag ("audio").GetComponent<AudioSource> ();
 	}
 
 	void OnTriggerEnter2D (Collider2D other) {
