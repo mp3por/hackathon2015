@@ -29,6 +29,7 @@ public class BallScript : MonoBehaviour {
 
 	private Rigidbody2D rb;
 	public int nextPiece;
+	private GameObject nextPieceObj;
 	public GameObject[] pieces;
 
 	private GameObject lastPlayer;
@@ -93,7 +94,6 @@ public class BallScript : MonoBehaviour {
 			incrementPlayerOneScore  (1);
 			source.PlayOneShot(paddleHit, 1);
 		} else if (collision.gameObject.CompareTag ("tetrisTriggerTwo")) {
-			shufflePiece();
 			source.PlayOneShot(dead, 1);
 			incrementPlayerTwoScore(-2);
 			incrementPlayerOneScore(3);
@@ -102,8 +102,8 @@ public class BallScript : MonoBehaviour {
 				Instantiate(gameObject, new Vector3(0, 0, 0), transform.rotation);
 			}
 			Destroy(gameObject);
-		} else if (collision.gameObject.CompareTag ("tetrisTriggerOne")) {
 			shufflePiece();
+		} else if (collision.gameObject.CompareTag ("tetrisTriggerOne")) {
 			source.PlayOneShot(dead, 1);
 			incrementPlayerTwoScore(3);
 			incrementPlayerOneScore(-2);
@@ -112,16 +112,19 @@ public class BallScript : MonoBehaviour {
 				Instantiate(gameObject, new Vector3(0, 0, 0), transform.rotation);
 			}
 			Destroy(gameObject);
+			shufflePiece();
 		}
 	}
 
 	void shufflePiece() {
+		Destroy (nextPieceObj);
 		GameObject[] objs = GameObject.FindGameObjectsWithTag ("nextPiece");
 		foreach (GameObject obj in objs) {
 			Destroy(obj);
 		}
 		nextPiece = Random.Range (0, pieces.GetLength (0));
-		(Instantiate (pieces [nextPiece], new Vector3 (0, 75, 0), Quaternion.identity) as GameObject).transform.tag = "nextPiece";
+		nextPieceObj = Instantiate (pieces [nextPiece], new Vector3 (0, 75, 0), Quaternion.identity) as GameObject;
+		nextPieceObj.transform.tag = "nextPiece";
 	}
 
 	public IEnumerator PlayerWin(int p) {

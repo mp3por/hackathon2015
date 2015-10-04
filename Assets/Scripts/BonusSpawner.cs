@@ -21,6 +21,7 @@ public class BonusSpawner : MonoBehaviour
 	
 	void Start ()
 	{
+//		objects = new GameObject[]{bonusBrick};
 		objects = new GameObject[]{bonusPoints,bonusBalls,bonusBrick,bonusMushroom};
 		StartCoroutine (SpawnBonuses ());
 	}
@@ -35,7 +36,7 @@ public class BonusSpawner : MonoBehaviour
 		while (true) {
 			Vector3 spawnPosition = new Vector2 (spawnValues.x, Random.Range (-spawnValues.y, spawnValues.y));
 			Quaternion spawnRotation = Quaternion.identity;
-			Instantiate (objects[1], spawnPosition, spawnRotation);
+			Instantiate (objects[Random.Range (0, objects.Length)], spawnPosition, spawnRotation);
 			yield return new WaitForSeconds (bonusSpawnWaitTime);
 		}
 	}

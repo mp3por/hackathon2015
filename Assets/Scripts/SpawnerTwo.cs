@@ -13,9 +13,9 @@ public class SpawnerTwo : MonoBehaviour {
 		if (position.y > 40) {
 			position.y = 40;
 		}
-
 		position.x = 80;
 		
-		(Instantiate(pieces[piecePosition], position, Quaternion.identity) as GameObject).AddComponent<GroupTwo> ();
+		GameObject go = Instantiate (pieces [piecePosition], position, Quaternion.identity) as GameObject;
+		go.AddComponent<GroupTwo> ();
 	}
 }

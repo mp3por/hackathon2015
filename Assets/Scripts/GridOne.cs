@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class GridOne : MonoBehaviour {
-	public static float gridHeight = 90;
+	public static float gridHeight = 105;
 	public static float gridWidth = 90;
 	public static float cellSize = 5;
 	public static int w = (int)(gridWidth / cellSize);
