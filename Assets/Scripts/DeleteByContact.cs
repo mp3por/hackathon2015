@@ -11,7 +11,6 @@ public class DeleteByContact : MonoBehaviour {
 
 	void Start () {
 		source = GameObject.FindObjectOfType<AudioSource> ();
-		Debug.Log (source.mute);
 	}
 
 	void OnTriggerEnter2D (Collider2D other) {

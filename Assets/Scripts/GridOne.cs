@@ -2,23 +2,29 @@
 using System.Collections;
 
 public class GridOne : MonoBehaviour {
-	// The Grid itself
-	public static int w = 19;
-	public static int h = 19;
+	public static float gridHeight = 90;
+	public static float gridWidth = 90;
 	public static float cellSize = 5;
-	private static Vector2 displacement = new Vector2(0,-75);
+	public static int w = (int)(gridWidth / cellSize);
+	public static int h = (int)(gridHeight / cellSize);
+	private static Vector2 displacement = new Vector2(0,-65);
 	public static Transform[,] grid = new Transform[w, h];
 
 	public static Vector2 roundVec2(Vector2 v) {
-		return new Vector2(Mathf.Round((v.y-displacement.x+w*cellSize/2)/cellSize),
-		                   Mathf.Round((-(displacement.y-v.x)+h*cellSize)/cellSize));
+		Vector2 log = new Vector2(Mathf.Round((v.y-displacement.x+gridWidth/2)/cellSize),
+		                   Mathf.Round((-(displacement.y-v.x)+gridHeight)/cellSize));
+		if (log.x >= w || log.y >= h) {
+			Debug.Log (v);
+			Debug.Log (log);
+		}
+		return log;
 	}
 
 	public static bool insideBorder(Vector2 pos) {
 		return ((int)pos.x >= 0 &&
 		        (int)pos.x < w &&
 		        (int)pos.y >= 0 &&
-		        (int)pos.y <= h);
+		        (int)pos.y < h);
 	}
 
 	public static void deleteRow(int y) {
@@ -31,11 +37,8 @@ public class GridOne : MonoBehaviour {
 	public static void decreaseRow(int y) {
 		for (int x = 0; x < w; ++x) {
 			if (grid[x, y] != null) {
-				// Move one towards bottom
 				grid[x, y-1] = grid[x, y];
 				grid[x, y] = null;
-				
-				// Update Block position
 				grid[x, y-1].position += new Vector3(-cellSize, 0, 0);
 			}
 		}

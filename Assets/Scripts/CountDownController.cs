@@ -8,33 +8,28 @@ public class CountDownController : MonoBehaviour
 	public Text countDownText;
 	public GameObject ball;
 
-	private int privateCountDownTime = 4;
-	
-//	void Start ()
-//	{
-//		StartCountDown ();
-//	}
+	public int privateCountDownTime = 4;
+
+	private int resetTime;
 
 	public void SetBall (GameObject ball){
 		this.ball = ball;
+		resetTime = privateCountDownTime;
 	}
 
 	public void StartCountDown (){
-		Debug.Log ("Start Count Down");
-		this.privateCountDownTime = 4;
 		StartCoroutine (SpawnBall ());
 	}
 
 	IEnumerator SpawnBall ()
 	{
 		do {
-			countDownText.text = "" + privateCountDownTime;
-			privateCountDownTime -= 1;
+			countDownText.text = "" + resetTime;
+			resetTime -= 1;
 			yield return new WaitForSeconds (1);
-		} while (privateCountDownTime > 0);
+		} while (resetTime > 0);
 
 		countDownText.text = "";
 		ball.BroadcastMessage ("PushBall");
-		Debug.Log ("countdown end");
 	}
 }

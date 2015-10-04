@@ -1,22 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class SpawnerOne : MonoBehaviour {
 
-	public void spawnNext(Vector3 position, GameObject piece) {
-		position.y = (int)(position.y / 5) * 5;
-		position.x = -75;
-		
-		Instantiate(piece,
-		            position,
-		            Quaternion.identity);
-	}
+	public GameObject[] pieces;
 
-	void Start(){
-//		spawnNext ();
-	}
+	public void spawnNext(Vector3 position, int piecePosition) {
+		position.y = Mathf.RoundToInt(position.y / 5) * 5;
+		if (position.y < -40) {
+			position.y = -40;
+		}
+		if (position.y > 40) {
+			position.y = 40;
+		}
+		position.x = -80;
 
-	void Update() {
-
+		GameObject go = Instantiate (pieces [piecePosition], position, Quaternion.identity) as GameObject;
+		go.AddComponent<GroupOne> ();
 	}
 }

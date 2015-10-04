@@ -2,21 +2,20 @@
 using System.Collections;
 
 public class SpawnerTwo : MonoBehaviour {
-
-	public void spawnNext(Vector3 position, GameObject piece) {
+	
+	public GameObject[] pieces;
+	
+	public void spawnNext(Vector3 position, int piecePosition) {
 		position.y = (int)(position.y / 5) * 5;
-		position.x = 75;
+		if (position.y < -40) {
+			position.y = -40;
+		}
+		if (position.y > 40) {
+			position.y = 40;
+		}
 
-		Instantiate(piece,
-		            position,
-		            Quaternion.identity);
-	}
-
-	void Start(){
-//		spawnNext ();
-	}
-
-	void Update() {
-
+		position.x = 80;
+		
+		(Instantiate(pieces[piecePosition], position, Quaternion.identity) as GameObject).AddComponent<GroupTwo> ();
 	}
 }

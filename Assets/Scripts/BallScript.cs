@@ -27,9 +27,6 @@ public class BallScript : MonoBehaviour {
 
 	private Rigidbody2D rb;
 	public int nextPiece;
-	private GameObject nextPieceObj;
-	public GameObject[] piecesOne;
-	public GameObject[] piecesTwo;
 	public GameObject[] pieces;
 
 	private GameObject lastPlayer;
@@ -47,16 +44,13 @@ public class BallScript : MonoBehaviour {
 		p2s.score = p2s.score + amount;
 		p2t.text = "" + p2s.score;
 	}
-
-//	public void setCountDownText (){
-//		countDownText.text = "" + countDownTime;
-//		countDownTime -= 1;
-//	}
 	
 	void Start () {
 		countDownTime = 3;
 		lastPlayer = null;
 		
+		rb = GetComponent<Rigidbody2D> ();
+
 		p2s = player2.GetComponent<PlayerTwoScript> ();
 		p1s = player1.GetComponent<PlayerOneScript> ();
 
@@ -86,29 +80,25 @@ public class BallScript : MonoBehaviour {
 			incrementPlayerOneScore  (1);
 			source.PlayOneShot(paddleHit, 1);
 		} else if (collision.gameObject.CompareTag ("tetrisTriggerTwo")) {
+			shufflePiece();
 			source.PlayOneShot(dead, 1);
-			p2s.score = p2s.score - 2;
-			p1s.score = p1s.score + 3;
-			p2t.text =  p2s.score.ToString();
-			p1t.text = p1s.score.ToString();
-			FindObjectOfType<SpawnerTwo>().spawnNext(collision.contacts[0].point, piecesTwo[nextPiece]);
+			incrementPlayerTwoScore(-2);
+			incrementPlayerOneScore(3);
+			FindObjectOfType<SpawnerTwo>().spawnNext(collision.contacts[0].point, nextPiece);
 			if (GameObject.FindGameObjectsWithTag("ball").Length < 2) {
 				Instantiate(gameObject, new Vector3(0, 0, 0), transform.rotation);
 			}
 			Destroy(gameObject);
-			shufflePiece();
 		} else if (collision.gameObject.CompareTag ("tetrisTriggerOne")) {
+			shufflePiece();
 			source.PlayOneShot(dead, 1);
-			p1s.score = p1s.score - 2;
-			p2s.score = p2s.score + 3;
-			p2t.text = p2s.score.ToString();
-			p1t.text = p1s.score.ToString();
-			FindObjectOfType<SpawnerOne>().spawnNext(collision.contacts[0].point, piecesOne[nextPiece]);
+			incrementPlayerTwoScore(3);
+			incrementPlayerOneScore(-2);
+			FindObjectOfType<SpawnerOne>().spawnNext(collision.contacts[0].point, nextPiece);
 			if (GameObject.FindGameObjectsWithTag("ball").Length < 2) {
 				Instantiate(gameObject, new Vector3(0, 0, 0), transform.rotation);
 			}
 			Destroy(gameObject);
-			shufflePiece();
 		}
 	}
 
@@ -118,7 +108,7 @@ public class BallScript : MonoBehaviour {
 			Destroy(obj);
 		}
 		nextPiece = Random.Range (0, pieces.GetLength (0));
-		nextPieceObj = Instantiate (pieces[nextPiece], new Vector3 (0, 75, 0), Quaternion.identity) as GameObject;
+		(Instantiate (pieces [nextPiece], new Vector3 (0, 75, 0), Quaternion.identity) as GameObject).transform.tag = "nextPiece";
 	}
 
 	public void PlayerWin(int p) {
