@@ -7,10 +7,14 @@ public class Menu : MonoBehaviour {
 	private int choice = 0;
 	public Text play;
 	public Text exit;
+
+	private AudioSource audio;
+
+	public AudioClip menuChange;
 	
 	// Use this for initialization
 	void Start () {
-		AudioSource audio = GetComponent<AudioSource>();
+		audio = GetComponent<AudioSource>();
 		audio.Play();
 		audio.Play(44100);
 	}
@@ -20,10 +24,12 @@ public class Menu : MonoBehaviour {
 		if (Input.GetKey (KeyCode.DownArrow)) {
 			play.text = "LOCAL MULTIPLAYER";
 			exit.text = "- EXIT";
+			audio.PlayOneShot(menuChange);
 			choice = 1;
 		} else if (Input.GetKey (KeyCode.UpArrow)) {
 			play.text = "- LOCAL MULTIPLAYER";
 			exit.text = "EXIT";
+			audio.PlayOneShot(menuChange);
 			choice = 0;
 		} else if(Input.GetKey(KeyCode.Return)) {
 			switch (choice) {
