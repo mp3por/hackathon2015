@@ -6,10 +6,9 @@ public class GroupTwo : MonoBehaviour {
 	public float step = 5;
 
 	void Start() {
-		if (!isValidGridPos()) {
-			Debug.Log ("One finished");
+		if(!isValidGridPos()) {
 			GameObject ball = GameObject.FindGameObjectWithTag("ball");
-			BallScript bs = ball.GetComponent<BallScript>();
+			BallScript bs = ball.GetComponent<BallScript>() as BallScript;
 			bs.PlayerWin(1);
 			Destroy(ball);
 			Destroy(gameObject);
@@ -59,6 +58,6 @@ public class GroupTwo : MonoBehaviour {
 		foreach (Transform child in transform) {
 			Vector2 v = GridTwo.roundVec2(child.position);
 			GridTwo.grid[(int)v.x, (int)v.y] = child;
-		}        
+		}
 	}
 }

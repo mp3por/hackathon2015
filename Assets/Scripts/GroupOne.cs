@@ -5,7 +5,7 @@ public class GroupOne : MonoBehaviour {
 	float lastFall = 0;
 	public float step = 5;
 
-	void Start() {
+	void Awake() {
 		if (!isValidGridPos()) {
 			GameObject ball = GameObject.FindGameObjectWithTag("ball");
 			BallScript bs = ball.GetComponent<BallScript>();

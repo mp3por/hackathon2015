@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class GridOne : MonoBehaviour {
-	public static float gridHeight = 105;
+	public static float gridHeight = 110;
 	public static float gridWidth = 90;
 	public static float cellSize = 5;
 	public static int w = (int)(gridWidth / cellSize);
@@ -18,6 +18,16 @@ public class GridOne : MonoBehaviour {
 			Debug.Log (log);
 		}
 		return log;
+	}
+
+	public static bool hasOnLine(int y, MonoBehaviour go) {
+		for (int i=0; i<w; i++) {
+			if(grid[i,y] != null) {
+				Debug.Log ("ASDASDASDASDS");
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public static bool insideBorder(Vector2 pos) {

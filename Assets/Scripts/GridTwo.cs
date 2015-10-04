@@ -20,6 +20,16 @@ public class GridTwo: MonoBehaviour {
 		}
 		return log;
 	}
+
+	public static bool hasOnLine(int y, MonoBehaviour go) {
+		for (int i=0; i<w; i++) {
+			if(grid[i,y] != null && 
+			   grid[i, y].parent != go.transform) {
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	public static bool insideBorder(Vector2 pos) {
 		return ((int)pos.x >= 0 &&
