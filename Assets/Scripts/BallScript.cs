@@ -6,6 +6,12 @@ public class BallScript : MonoBehaviour {
 	public GameObject player1;
 	public GameObject player2;
 
+	public AudioClip paddleHit;
+	public AudioClip dead;
+	public AudioClip winSound;
+
+	public AudioSource source;
+
 	public Text p1t;
 	public Text p2t;
 	public Text winT;
@@ -73,11 +79,14 @@ public class BallScript : MonoBehaviour {
 			lastPlayer = collision.gameObject;
 			rb.AddForce (new Vector2 (.0f, Random.Range (-.1f, .1f)));
 			incrementPlayerTwoScore  (1);
+			source.PlayOneShot(paddleHit, 1);
 		} else if (collision.gameObject.CompareTag ("paddle1")) {
 			lastPlayer = collision.gameObject;
 			rb.AddForce (new Vector2 (.0f, Random.Range (-.1f, .1f)));
 			incrementPlayerOneScore  (1);
+			source.PlayOneShot(paddleHit, 1);
 		} else if (collision.gameObject.CompareTag ("tetrisTriggerTwo")) {
+			source.PlayOneShot(dead, 1);
 			p2s.score = p2s.score - 2;
 			p1s.score = p1s.score + 3;
 			p2t.text =  p2s.score.ToString();
@@ -89,6 +98,7 @@ public class BallScript : MonoBehaviour {
 			Destroy(gameObject);
 			shufflePiece();
 		} else if (collision.gameObject.CompareTag ("tetrisTriggerOne")) {
+			source.PlayOneShot(dead, 1);
 			p1s.score = p1s.score - 2;
 			p2s.score = p2s.score + 3;
 			p2t.text = p2s.score.ToString();
@@ -112,6 +122,7 @@ public class BallScript : MonoBehaviour {
 	}
 
 	public void PlayerWin(int p) {
+		source.PlayOneShot(winSound);
 		if (p == 2) {
 			winT.text = "Player Right Wins";
 		} else {
